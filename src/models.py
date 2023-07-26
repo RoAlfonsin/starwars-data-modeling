@@ -47,18 +47,13 @@ class Vehicle(Base):
     cargo_capacity = Column(Integer)
     imageUrl = Column(String(256))
 
-class Favorites_Names(Base):
-    __tablename__ = 'favorites_ids'
-    id = Column(Integer, primary_key=True)
-    vehicle_id = Column(Integer, ForeignKey('vehicles.id'), default=-1)
-    character_id = Column(Integer, ForeignKey('characters.id'), default=-1)
-    planet_id = Column(Integer, ForeignKey('planets.id'), default=-1)
-
 class Favorite(Base):
     __tablename__ = 'favorites'
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('users.id'))
-    favorites_id = Column(Integer, ForeignKey('favorites_ids.id'))
+    vehicle_id = Column(Integer, ForeignKey('vehicles.id'), default=-1)
+    character_id = Column(Integer, ForeignKey('characters.id'), default=-1)
+    planet_id = Column(Integer, ForeignKey('planets.id'), default=-1)
 
 ## Draw from SQLAlchemy base
 render_er(Base, 'diagram.png')
